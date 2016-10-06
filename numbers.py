@@ -1,14 +1,15 @@
 import random, pickle, sys
 
 Lists = {}
-Lists = pickle.load(open("Lists.p" , "rb"))
-    
+try:
+	Lists = pickle.load(open("Lists.p" , "rb"))
+except:
+	pass
 
-def createList(name,length,minimum,maximum):
+def createList(Lists,name,length,minimum,maximum):
     list = []
     for i in range(0, int(length)):
         list.append(random.randint(minimum, maximum))
-    global Lists
     Lists[name] = list
 
 def listToString(name):
@@ -30,8 +31,8 @@ def checkList(name):
 
 
 while True:
-    global Lists
-    print("Input optione: \n")
+
+    print("Input option: \n")
     print("(1) Create random list\n")
     print("(2) See lists \n")
     print("(3) Check list from memory \n")
@@ -46,7 +47,7 @@ while True:
         length = (int(input("How many digits will it have?\n")))/2
         minimum = int(input("What is the minimum value to be generated?\n"))
         maximum = int(input("What is the maximum value to be generated?\n"))
-        createList(name,length,minimum,maximum)
+        createList(Lists,name,length,minimum,maximum)
         print(listToString(name))
     elif choice == 2:
         print(Lists.keys())
